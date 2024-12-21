@@ -1,0 +1,55 @@
+Written Walkthrough: Proactive Threat Detection and Analysis
+1. Introduction
+The project aims to analyze and detect the Zeus Banking Trojan using a proactive security approach. Various tools were used, including Suricata for network monitoring, Splunk for centralized analysis, Volatility for memory analysis, and YARA for malware detection.
+2. Environment Setup
+•	Virtual Machines:
+Two interconnected virtual machines (VMs) were set up:
+o	A Windows VM (infected machine).
+o	A Linux VM (monitoring system, using Kali Linux).
+Both VMs were configured to communicate by ensuring they could ping each other.
+•	Malware Simulation:
+Zeus Banking Trojan was executed in the Windows VM using theZoo repository.
+________________________________________
+3. Suricata for Network Monitoring
+1.	Installation:
+Installed and updated Suricata on the Kali Linux VM to download the default detection rules.
+2.	Monitoring Traffic (using suricata)
+3.	Malware Execution
+Zeus Trojan was executed in the Windows VM.
+4.	Analyzing Logs:
+After stopping Suricata, the fast.log file was analyzed for alerts
+________________________________________
+4. Integration with Splunk
+1.	Installation and Setup:
+Splunk was installed on the Windows VM, configured to monitor system, application, and security logs.
+2.	Log Ingestion:
+Logs from Suricata and Windows system were ingested into Splunk for centralized analysis.
+3.	Correlation Rules and Dashboards:
+o	Created rules to detect abnormal outbound traffic and link it with system activities (e.g., file changes, process creation).
+o	Built dashboards to visualize malicious activities, including network anomalies and suspicious process behaviors.
+________________________________________
+5. Memory Analysis with Volatility
+1.	Memory Dump Capture:
+A memory dump of the infected Windows VM was captured using tools like Task Manager or DumpIt.
+2.	Analysis with Volatility:
+Volatility was used to identify malicious processes and injected code.
+o	Listing Processes:
+o	Identifying Malicious Code: Processes such as ihat.exe were identified as malicious.
+o	Dumping Injected Code: Memory regions with suspicious content were dumped for further analysis.
+o	API Analysis:
+Zeus was found using APIs such as RegisterDragDrop, OleInitialize, and others, indicating spying and privilege escalation.
+________________________________________
+6. Zeus Detection with YARA
+1.	Custom YARA Rules:
+2.	Scanning: The rules were used to scan files and memory dumps
+________________________________________
+7. Findings
+•	Zeus was identified in memory regions with suspicious patterns such as PAGE_EXECUTE_READWRITE permissions and MZ headers.
+•	Indicators of compromise (IoCs) included injected code, abnormal process behaviors, and suspicious API calls.
+________________________________________
+8. Team members:
+•	Mohamed Ayman
+•	Ahmed Sameh
+•	Mina Nader
+•	Christine Guirguis
+
